@@ -1,48 +1,69 @@
 <section class="torneo-formulario">
-	<h2>Formulario del torneo</h2>
+  <h2>Formulario del torneo</h2>
 
-	<form>
-		<div>
-			<label for="nombre">Nombre del torneo</label>
-			<input id="nombre" name="nombre" type="text" placeholder="Ej. Copa Universitaria" />
-		</div>
+  <form [formGroup]="torneoForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="nombre">Nombre del torneo</label>
+      <input id="nombre" name="nombre" type="text" formControlName="nombre" placeholder="Ej. Copa Universitaria" />
+    </div>
 
-		<div>
-			<label for="deporte">Deporte</label>
-			<select id="deporte" name="deporte">
-				<option value="">Seleccione una opción</option>
-				<option value="futbol">Fútbol</option>
-				<option value="baloncesto">Baloncesto</option>
-				<option value="voleibol">Voleibol</option>
-				<option value="tenis">Tenis</option>
-			</select>
-		</div>
+    <div>
+      <label for="deporte">Deporte</label>
+      <select id="deporte" name="deporte" formControlName="deporte">
+        <option value="">Seleccione una opción</option>
+        <option value="futbol">Fútbol</option>
+        <option value="baloncesto">Baloncesto</option>
+        <option value="voleibol">Voleibol</option>
+        <option value="tenis">Tenis</option>
+      </select>
+    </div>
 
-		<div>
-			<label for="fechaInicio">Fecha de inicio</label>
-			<input id="fechaInicio" name="fechaInicio" type="date" />
-		</div>
+    <div>
+      <label for="fechaInicio">Fecha de inicio</label>
+      <input id="fechaInicio" name="fechaInicio" type="date" formControlName="fechaInicio" />
+    </div>
 
-		<div>
-			<label for="fechaFin">Fecha de fin</label>
-			<input id="fechaFin" name="fechaFin" type="date" />
-		</div>
+    <div>
+      <label for="fechaFin">Fecha de fin</label>
+      <input id="fechaFin" name="fechaFin" type="date" formControlName="fechaFin" />
+    </div>
 
-		<div>
-			<label for="sede">Sede</label>
-			<input id="sede" name="sede" type="text" placeholder="Lugar del torneo" />
-		</div>
+    <div>
+      <label for="ciudad">Ciudad</label>
+      <input id="ciudad" name="ciudad" type="text" formControlName="ciudad" placeholder="Lugar del torneo" />
+    </div>
 
-		<div>
-			<label for="equipos">Número de equipos</label>
-			<input id="equipos" name="equipos" type="number" min="2" placeholder="8" />
-		</div>
+    <div>
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion" rows="4" formControlName="descripcion" placeholder="Detalles del torneo"></textarea>
+    </div>
 
-		<div>
-			<label for="descripcion">Descripción</label>
-			<textarea id="descripcion" name="descripcion" rows="4" placeholder="Detalles del torneo"></textarea>
-		</div>
+    <h3>Equipos registrados</h3>
+    <table class="equipos-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre del equipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipo of equipos.controls; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ equipo.value }}</td>
+          <td>
+            <button type="button" (click)="removeEquipo(i)" class="btn-remove">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-		<button type="submit">Guardar torneo</button>
-	</form>
+    <div>
+      <label for="nuevoEquipo">Agregar equipo</label>
+      <input id="nuevoEquipo" name="nuevoEquipo" type="text" placeholder="Nombre del equipo" />
+      <button type="button" (click)="addEquipo(nuevoEquipo.value); nuevoEquipo.value=''" class="btn-add">Agregar</button>
+    </div>
+
+    <button type="submit" class="btn-submit">Guardar torneo</button>
+  </form>
 </section>
