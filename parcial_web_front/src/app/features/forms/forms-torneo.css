@@ -76,7 +76,7 @@ button[type='submit'] {
   color: #fff;
 }
 
-button.secondary {
+.button.secondary {
   background: #e2e8f0;
   color: var(--text-primary);
 }
@@ -112,4 +112,54 @@ button:disabled {
   .form-actions {
     flex-direction: column;
   }
+}
+
+/* Table styles */
+.equipos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.equipos-table th,
+.equipos-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.equipos-table th {
+  background-color: var(--bg-color-light);
+  font-weight: 600;
+}
+
+.btn-add,
+.btn-remove {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.btn-add {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  opacity: 0.9;
+}
+
+.btn-remove {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  opacity: 0.9;
 }
