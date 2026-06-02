@@ -1,30 +1,23 @@
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 export interface Torneo {
-  nombre: string;
-  fechaInicio: string; 
-  fechaFin?: string; 
-  ubicacion?: string;
-  maxEquipos: number;
-  tipo: 'liga' | 'eliminacion' | 'amistoso';
-  reglas?: string;
-  equipos?: string[];
+  id?: number;
+    nombre: string;
+  fechaInicio: string;
+  ciudad?: string;
+  deporte?: string;
 }
 
 export function createTorneoForm(fb: FormBuilder, initial?: Partial<Torneo>): FormGroup {
   const group = fb.group({
     nombre: [initial?.nombre || '', [Validators.required, Validators.minLength(3)]],
     fechaInicio: [initial?.fechaInicio || '', [Validators.required]],
-    fechaFin: [initial?.fechaFin || ''],
-    ubicacion: [initial?.ubicacion || ''],
-    maxEquipos: [initial?.maxEquipos ?? 8, [Validators.required, Validators.min(2)]],
-    tipo: [initial?.tipo || 'liga', [Validators.required]],
-    reglas: [initial?.reglas || ''],
-    equipos: fb.array((initial?.equipos || []).map(e => fb.control(e))) as FormArray,
+    ciudad: [initial?.ciudad || ''], 
+    deporte: [initial?.deporte || ''], 
   });
 
-  group.get('fechaFin')?.valueChanges.subscribe(() => validateDates(group));
   group.get('fechaInicio')?.valueChanges.subscribe(() => validateDates(group));
+
 
   return group;
 }
